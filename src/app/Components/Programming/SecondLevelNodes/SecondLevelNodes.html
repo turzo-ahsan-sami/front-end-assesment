@@ -1,0 +1,22 @@
+<div *ngIf="parentName" class="row">
+
+    <span class="p-2">
+        {{parentName}}
+    </span>
+
+    <ul class="list-group">
+        <ng-container *ngFor="let node of firstLevelNodes">
+            <li class="list-group-item text-left" *ngIf="checkDisplayCondition(node)">
+                {{node?.Name}}
+                <span class="pull-right">
+                    <i id='btnOpenModal2' class="fa fa-plus text-success font-size-16" data-toggle="modal"
+                        data-target="#nodeEntryModal2" (click)="openFirstChildForm(2, node)"></i>
+                    <i class="fa fa-times text-danger font-size-16 pl-2" (click)="removeNode(node?.Name)"></i>
+                </span>
+            </li>
+        </ng-container>
+    </ul>
+
+</div>
+
+

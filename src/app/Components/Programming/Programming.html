@@ -1,0 +1,46 @@
+<div class="container pt-5">
+    
+    <div class="col-md-12 row">
+        <div class="col-md-4">
+
+            <i class="fa fa-plus text-success font-size-16 p-2" data-toggle="modal" data-target="#nodeEntryModal" (click)="openEntryForm(0)"></i>
+
+            <ul class="list-group">
+                <ng-container *ngFor="let node of parentLevelNodes">
+                    <li class="list-group-item text-left" *ngIf="node?.Name">
+                        {{node?.Name}}
+                        <span class="pull-right">
+                            <i class="fa fa-plus text-success font-size-16" (click)="openFirstChildForm(node)"></i>
+                            <i class="fa fa-times text-danger font-size-16 pl-2" (click)="removeNode(node?.Name)"></i>
+                        </span>
+                    </li>
+                </ng-container>
+            </ul>
+        </div>
+        <div class="col-md-8">
+            <FirstLevelNodes [parentName]="parentName"></FirstLevelNodes>
+        </div>        
+    </div>
+
+
+</div>
+
+
+
+<!-- Entry Form  -->
+<div class="modal fade" id="nodeEntryModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Node</h5>
+                <button id='btnCloseModal' type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <NodeEntryFrom [nodeLevel]="nodeLevel" [parentName]="parentName"  (newNodeNameEmitter)="addNewNode($event)"></NodeEntryFrom>
+            </div>
+        </div>
+    </div>
+</div>

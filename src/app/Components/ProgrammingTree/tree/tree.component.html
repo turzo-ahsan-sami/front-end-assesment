@@ -1,0 +1,45 @@
+<ul *ngIf="treeData" class="list-group">
+
+  <li class="list-group-item text-left">
+      <i class="fa fa-plus text-success font-size-16"  data-toggle="modal"  data-target="#nodeEntryModal" (click)="openEntryForm()"></i>
+  </li>
+
+  <li *ngFor="let node of treeData" class="list-group-item text-left">
+
+    <span *ngIf="node?.children != 0"> > </span>
+    <span (click)="toggleChild(node)" class="ml-2"> {{ node?.name }} </span>
+    <span class="badge badge-secondary" *ngIf="node?.children?.length > 0">{{ node?.children?.length }}</span>
+
+    <span class="pull-right">
+      <!-- <i class="fa fa-plus text-success font-size-16"  data-toggle="modal"  data-target="#nodeEntryModal" (click)="openEntryForm(node)"></i> -->
+      <i class="fa fa-times text-danger font-size-16 pl-2" (click)="deleteNode(node)"></i>
+    </span>
+
+    <app-tree *ngIf="node.showChildren" [treeData]="node.children"></app-tree>
+
+  </li>
+
+</ul>
+
+
+<!-- Entry Form  -->
+<div class="modal fade" id="nodeEntryModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Node</h5>
+        <button id='btnCloseModal' type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <div class="form-group">
+              <label for="Name">Node Name</label>
+              <input type="text" required id="Name" class="form-control form-control-sm" [(ngModel)]="nodeName">
+          </div>
+      
+          <button type="submit" class="btn btn-sm btn-success" (click)="onNewEntry()">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>

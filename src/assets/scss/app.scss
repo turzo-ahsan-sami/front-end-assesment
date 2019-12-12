@@ -1,0 +1,13 @@
+.custom-button{
+
+    button{
+        border: none;
+        margin: 5px;
+        border-radius: 0%;
+        border-bottom: 1px solid rgba($color: grey, $alpha: 0.5);
+    }
+
+    button:hover{
+       border: 1px solid rgba($color: grey, $alpha: 0.3);
+    }
+}
